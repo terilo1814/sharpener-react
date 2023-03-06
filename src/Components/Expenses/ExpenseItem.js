@@ -14,7 +14,7 @@ const ExpenseItem = ({ amount, date, id, title, location }) => {
         result.remove()
     }
     return (
-        <Card className='expense-item' id={id}>
+        <Card className='expense-item' id_value={id}>
             <ExpenseDate date={date} />
             <div className='expense-item__description'>
                 <h2>{title} {location}</h2>

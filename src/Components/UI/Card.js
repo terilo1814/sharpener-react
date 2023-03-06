@@ -1,9 +1,9 @@
 import './Card.css'
 
-const Card = ({ id, className, children }) => {
+const Card = ({ id_value, className, children }) => {
     const classes = 'card ' + className
     return (
-        <div className={classes} id={id}>{children}</div>
+        <div className={classes} id={id_value}>{children}</div>
     )
 }
 export default Card
