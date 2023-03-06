@@ -15,6 +15,8 @@ const ExpenseItem = ({ amount, date, id, title, location }) => {
     }
     return (
         <Card className='expense-item' id_value={id}>
+ {/* id_value is passed into the card component and id=e1,e2...
+ While fetching and passing we are using the id which is e1,e2  */}
             <ExpenseDate date={date} />
             <div className='expense-item__description'>
                 <h2>{title} {location}</h2>
