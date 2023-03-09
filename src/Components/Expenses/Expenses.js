@@ -1,9 +1,28 @@
+import ExpenseFilter from './ExpenseFilter';
 import ExpenseItem from './ExpenseItem';
 import Card from '../UI/Card';
 import './Expenses.css'
+import { useState, useEffect } from 'react';
 
-function Expenses() {
-    const expenses = [
+const Expenses=({expenseList}) =>{
+
+    const [filteredYear,setFilteredYear]=useState('2020')
+    
+        const filterChangeHandler=selectedYear=>{
+            setFilteredYear(selectedYear)
+        }
+
+    const [eList,setEList]=useState([])
+
+    useEffect(()=>{
+        if(expenseList){
+            const result=[...eList]   
+            result.push(expenseList)
+            setEList(result)
+        }
+    },[expenseList])
+
+    const expenses=[
         {
             id: 'e1',
             title: 'Toilet Paper',
@@ -27,15 +46,25 @@ function Expenses() {
             LocationOfExpenditure: 'Mumbai',
         },
     ];
-    
+   
     return (
         <Card className="expenses">
+             <ExpenseFilter selected={filteredYear} onChangefilter={filterChangeHandler}/>
+            
+            {eList.map(expense=>(
+                <ExpenseItem title={expense.title}
+                    amount={expense.amount}
+                    date={expense.date}
+                    id={expense.id} >
+                </ExpenseItem>
+            ))}
             {expenses.map(expense => (
                 <ExpenseItem title={expense.title}
                     amount={expense.amount}
                     date={expense.date}
                     location={expense.LocationOfExpenditure}
                     id={expense.id} >
+                    
                 </ExpenseItem>
             ))}
         </Card>)
