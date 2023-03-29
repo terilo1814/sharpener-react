@@ -2,7 +2,7 @@ import { useState } from 'react'
 import ExpenseDate from './ExpenseDate'
 import './ExpenseItem.css'
 import Card from '../UI/Card'
-import ExpenseFilter from './ExpenseFilter'
+// import ExpenseFilter from './ExpenseFilter'
 
 const ExpenseItem = ({ amount, date, id, title, location }) => {
 

@@ -1,8 +1,7 @@
 import './ExpenseForm.css'
 import { useState } from 'react'
 
-const ExpenseForm = ({onSaveExpenseData}) => 
-{
+const ExpenseForm = ({ onSaveExpenseData,stopEditingHandler }) => {
 
     const [enteredTitle, setEnteredTitle] = useState()
     const [enteredAmount, setEnteredAmount] = useState()
@@ -25,18 +24,18 @@ const ExpenseForm = ({onSaveExpenseData}) =>
         event.preventDefault()
 
 
-        const expenseData={
-            title:enteredTitle,
-            amount:enteredAmount,
-            date:new Date(enteredDate)
+        const expenseData = {
+            title: enteredTitle,
+            amount: enteredAmount,
+            date: new Date(enteredDate)
         }
 
-       onSaveExpenseData(expenseData)
-       
-       setEnteredTitle('')
-       setEnteredAmount('')
-       setEnteredDate('')
-       
+        onSaveExpenseData(expenseData)
+
+        setEnteredTitle('')
+        setEnteredAmount('')
+        setEnteredDate('')
+
 
         // const result=document.getElementsByClassName('new-expense')[0]
         // const li=document.createElement('li')
@@ -59,12 +58,13 @@ const ExpenseForm = ({onSaveExpenseData}) =>
                     <label>Amount</label>
                     <input type='number' min='0.01' step='0.01' value={enteredAmount} onChange={amountChangeHandler} />
 
-                    
+
                     <label>Date</label>
                     <input type='date' min='2019-01-01' max='2023-12-31' value={enteredDate} onChange={dateChangeHandler} />
                 </div>
             </div>
             <div className='new-expense__actions'>
+                <button type='button' onClick={stopEditingHandler} >Cancel</button>
                 <button type='submit' >Add Expense</button>
             </div>
         </form>

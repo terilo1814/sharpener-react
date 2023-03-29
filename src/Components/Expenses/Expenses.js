@@ -1,28 +1,34 @@
 import ExpenseFilter from './ExpenseFilter';
-import ExpenseItem from './ExpenseItem';
+// import ExpenseItem from './ExpenseItem';
 import Card from '../UI/Card';
 import './Expenses.css'
 import { useState, useEffect } from 'react';
+import ExpensesList from './ExpensesList';
+import ExpenseChart from './ExpenseChart';
 
-const Expenses=({expenseList}) =>{
 
-    const [filteredYear,setFilteredYear]=useState('2020')
-    
-        const filterChangeHandler=selectedYear=>{
-            setFilteredYear(selectedYear)
-        }
+const Expenses = ({ setExpenses, expense_list }) => {
 
-    const [eList,setEList]=useState([])
+    const [filteredYear, setFilteredYear] = useState('2020')
 
-    useEffect(()=>{
-        if(expenseList){
-            const result=[...eList]   
-            result.push(expenseList)
-            setEList(result)
-        }
-    },[expenseList])
+    const filterChangeHandler = selectedYear => {
+        setFilteredYear(selectedYear)
+    }
 
-    const expenses=[
+    const filteredExpense = expense_list.filter(expense => {
+        return expense.date.getFullYear().toString() === filteredYear
+    })
+
+
+
+    useEffect(() => {
+        setExpenses(expenses);
+    }, []);
+
+
+
+
+    const expenses = [
         {
             id: 'e1',
             title: 'Toilet Paper',
@@ -46,27 +52,29 @@ const Expenses=({expenseList}) =>{
             LocationOfExpenditure: 'Mumbai',
         },
     ];
-   
+
+
     return (
         <Card className="expenses">
-             <ExpenseFilter selected={filteredYear} onChangefilter={filterChangeHandler}/>
+
+            <ExpenseFilter selected={filteredYear} onChangefilter={filterChangeHandler} />
+            <ExpenseChart expense={filteredExpense} />
+            <ExpensesList filteredExpense={filteredExpense} />
             
-            {eList.map(expense=>(
-                <ExpenseItem title={expense.title}
-                    amount={expense.amount}
-                    date={expense.date}
-                    id={expense.id} >
-                </ExpenseItem>
-            ))}
-            {expenses.map(expense => (
-                <ExpenseItem title={expense.title}
-                    amount={expense.amount}
-                    date={expense.date}
-                    location={expense.LocationOfExpenditure}
-                    id={expense.id} >
-                    
-                </ExpenseItem>
-            ))}
+            {/* {filteredExpense.length === 0 && <p>No expenses found</p>}
+            {filteredExpense.length > 0 &&
+                filteredExpense.map((expense) => (
+                    <ExpenseItem
+                        key={expense.id}
+                        title={expense.title}
+                        amount={expense.amount}
+                        date={expense.date}
+                        id={expense.id} >
+                    </ExpenseItem>
+                ))} */}
+
+
+
         </Card>)
 }
 export default Expenses
