@@ -186,11 +186,11 @@
 
 // export default App
 
-
 import { Header } from "./Restaurant_project/Components/Layout/Header"
 import { Meals } from "./Restaurant_project/Components/Meals/Meals"
 import { Cart } from "./Restaurant_project/Components/Cart/Cart"
 import { useState } from "react"
+import CartProvider from "./store/CartProvider"
 
 function App() {
 
@@ -207,11 +207,11 @@ function App() {
   
 
   return (
-    <>
+    <CartProvider>
       {cartIsShown && <Cart onClose={hideCartHandler}/>}
       <Header onShowCart={showCartHandler}/>
       <Meals />
-    </>
+    </CartProvider>
 
   )
 }
