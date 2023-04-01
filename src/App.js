@@ -190,12 +190,26 @@
 import { Header } from "./Restaurant_project/Components/Layout/Header"
 import { Meals } from "./Restaurant_project/Components/Meals/Meals"
 import { Cart } from "./Restaurant_project/Components/Cart/Cart"
+import { useState } from "react"
 
 function App() {
+
+  const [cartIsShown, setCartIsShown] = useState(false)
+
+
+  const hideCartHandler = () => {
+    setCartIsShown(false)
+  }
+
+  const showCartHandler = () => {
+    setCartIsShown(true)
+  }
+  
+
   return (
     <>
-      <Cart />
-      <Header />
+      {cartIsShown && <Cart onClose={hideCartHandler}/>}
+      <Header onShowCart={showCartHandler}/>
       <Meals />
     </>
 
