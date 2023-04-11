@@ -1,0 +1,10 @@
+.items {
+    margin-top: 15px;
+}
+.items button{
+    margin-left: 8px;
+    border-radius: 4px;
+    color: white;
+    background-color: rgb(165, 83, 28);
+    padding: 3px;
+}

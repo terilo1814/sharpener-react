@@ -186,16 +186,56 @@
 
 // export default App
 
-import { Header } from "./Restaurant_project/Components/Layout/Header"
-import { Meals } from "./Restaurant_project/Components/Meals/Meals"
-import { Cart } from "./Restaurant_project/Components/Cart/Cart"
+// import { Header } from "./Restaurant_project/Components/Layout/Header"
+// import { Meals } from "./Restaurant_project/Components/Meals/Meals"
+// import { Cart } from "./Restaurant_project/Components/Cart/Cart"
+// import { useState } from "react"
+// import CartProvider from "./store/CartProvider"
+
+// function App() {
+
+//   const [cartIsShown, setCartIsShown] = useState(false)
+
+
+//   const hideCartHandler = () => {
+//     setCartIsShown(false)
+//   }
+
+//   const showCartHandler = () => {
+//     setCartIsShown(true)
+//   }
+
+
+//   return (
+//     <CartProvider>
+//       {cartIsShown && <Cart onClose={hideCartHandler}/>}
+//       <Header onShowCart={showCartHandler}/>
+//       <Meals />
+//     </CartProvider>
+
+//   )
+// }
+// export default App
+
 import { useState } from "react"
-import CartProvider from "./store/CartProvider"
+import { ShoppingForm } from './3 hr project(2)/ShoppingForm'
+import { ShoppingList } from "./3 hr project(2)/ShoppingList"
+import { Cart } from "./3 hr project(2)/Cart"
+import CartProvider from "./3 hr project(2)/CartProvider"
+
 
 function App() {
 
+  const [dataList, setDataList] = useState([])
   const [cartIsShown, setCartIsShown] = useState(false)
+  const [count, setCount] = useState(0)
+  const [totalAmount, setTotalAmount] = useState(0)
+  const [cartList, setCartList] = useState([])
 
+
+  const countHandler = () => {
+    setCount(count + 1)
+  }
 
   const hideCartHandler = () => {
     setCartIsShown(false)
@@ -204,16 +244,36 @@ function App() {
   const showCartHandler = () => {
     setCartIsShown(true)
   }
-  
+
+  const addData = (shirt, desc, price, size) => {
+    setDataList((prevData) => {
+      return [...prevData, { shirt: shirt, desc: desc, price: price, size: size, id: Math.random().toString() }]
+    })
+    setCartList((prevData) => {
+      return [...prevData, { shirt: shirt, size: { large: 0, medium: 0, small: 0 } }]
+    })
+  }
 
   return (
-    <CartProvider>
-      {cartIsShown && <Cart onClose={hideCartHandler}/>}
-      <Header onShowCart={showCartHandler}/>
-      <Meals />
-    </CartProvider>
+
+    <>
+      <ShoppingForm
+        addData={addData}
+        showCartHandler={showCartHandler}
+        count={count} />
+      <ShoppingList
+        dataList={dataList}
+        setDataList={setDataList}
+        countHandler={countHandler}
+        setTotalAmount={setTotalAmount}
+        setCartList={setCartList} />
+      {cartIsShown &&
+        <Cart
+          hideCartHandler={hideCartHandler}
+          totalAmount={totalAmount}
+          cartList={cartList} />}
+    </>
 
   )
 }
 export default App
-

@@ -1,0 +1,18 @@
+button{
+    margin-left: 15px;
+    border-radius: 3px;
+    box-shadow: 2px 3px 4px rgb(252, 93, 106);
+    background-color: antiquewhite;
+}
+.total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+  .list-items{
+    font-size: large;
+    font-family: cursive;
+  }

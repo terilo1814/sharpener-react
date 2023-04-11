@@ -1,0 +1,31 @@
+* {
+    background-color: rgb(245, 248, 250);
+}
+
+
+.form-group input {
+    width: 20%;
+}
+
+.list-option input {
+    width: 6%;
+    border-radius: 3px;
+    margin-left: 6px;
+}
+.btn{
+    margin-top: 15px;
+    margin-left: 13px;
+}
+/* .container {
+    position: relative;
+  
+    width: 400px;
+    height: 300px;
+  } */
+  
+  .cart-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: red;
+  }
